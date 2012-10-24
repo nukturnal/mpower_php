@@ -6,6 +6,9 @@ abstract class MPower {
   const VERSION = "0.0.1";
 }
 
-require_once("MPower/setup.php");
+require_once("MPower/integration.php");
+require_once("MPower/checkout.php");
+require_once("MPower/checkout/store.php");
+require_once("MPower/checkout/invoice.php");
 require_once("MPower/libraries/Requests.php");
 require_once("MPower/utilities.php");
