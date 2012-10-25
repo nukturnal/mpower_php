@@ -1,11 +1,14 @@
 <?php
 class MPower_Checkout_Store extends MPower {
-  public $name;
-  public $tagline;
-  public $postalAddress;
-  public $phoneNumber;
-  public $websiteUrl;
-  public $logoUrl;
+  private static $name;
+  private static $tagline;
+  private static $postalAddress;
+  private static $phoneNumber;
+  private static $websiteUrl;
+  private static $logoUrl;
+  private static $cancelUrl;
+  private static $returnUrl;
+
 
   public static function setName($name) {
     self::$name = $name;
@@ -27,8 +30,22 @@ class MPower_Checkout_Store extends MPower {
     self::$websiteUrl = $websiteUrl;
   }
 
-  public static function setLogoUrl($logoUrl) {
-    self::$logoUrl = $logoUrl;
+  public static function setLogoUrl($url) {
+    if(filter_var($url, FILTER_VALIDATE_URL)){
+      self::$logoUrl = $url;
+    }
+  }
+
+  public static function setCancelUrl($url) {
+    if(filter_var($url, FILTER_VALIDATE_URL)){
+      self::$cancelUrl = $url;
+    }
+  }
+
+  public static function setReturnUrl($url) {
+    if(filter_var($url, FILTER_VALIDATE_URL)){
+      self::$returnUrl = $url;
+    }
   }
 
   public static function getName() {
@@ -53,5 +70,13 @@ class MPower_Checkout_Store extends MPower {
 
   public static function getLogoUrl() {
     return self::$logoUrl;
+  }
+
+  public static function getCancelUrl() {
+    return self::$cancelUrl;
+  }
+
+  public static function getReturnUrl() {
+    return self::$returnUrl;
   }
 }
