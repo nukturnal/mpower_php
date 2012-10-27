@@ -11,11 +11,11 @@ Require Mpower PHP library
 
 ## Setup your API Keys
 
-    MPower_Setup::setMasterKey("3b8cfee0-f057-012f-b6c6-0026bb034858");
-    MPower_Setup::setPublicKey("test_public_H7qP-8OebRIXxLP6TDzx9H2QN-E");
-    MPower_Setup::setPrivateKey("test_private_LdA96IPb58stYRFaIAbMlY-QwJE");
-    MPower_Setup::setMode("test");
-    MPower_Setup::setToken("fb008051e7e5a819b8a6");
+    MPower_Setup::setMasterKey(YOUR_API_MASTER_KEY);
+    MPower_Setup::setPublicKey(YOUR_API_PUBLIC_KEY);
+    MPower_Setup::setPrivateKey(YOUR_API_PRIVATE_KEY);
+    MPower_Setup::setMode(["test"|"live"]);
+    MPower_Setup::setToken(YOUR_API_TOKEN);
 
 ## Create your Checkout Invoice
 
