@@ -17,11 +17,29 @@ Require Mpower PHP library
     MPower_Setup::setMode(["test"|"live"]);
     MPower_Setup::setToken(YOUR_API_TOKEN);
 
+## Setup your checkout store information
+
+    MPower_Checkout_Store::setName("My Awesome Online Store");
+    MPower_Checkout_Store::setTagline("My awesome store's awesome tagline");
+    MPower_Checkout_Store::setPhoneNumber(STORE_PHONENO);
+    MPower_Checkout_Store::setPostalAddress(STORE_ADDRESS);
+
+Customer will be redirected back to this URL when he cancels the checkout on MPower website
+
+    MPower_Checkout_Store::setCancelUrl(CHECKOUT_CANCEL_URL);
+
+MPower will automatically redirect customer to this URL after successfull payment
+This setup is strictly optional and not needed in most cases.
+WHen a returnURL is not set, MPower will redirect the customer to the receipt page.
+
+    MPower_Checkout_Store::setReturnUrl(CHECKOUT_RETURN_URL);
+
 ## Create your Checkout Invoice
 
     $co = new MPower_Checkout_Invoice();
 
-    // addItem(name_of_item,quantity,unit_price,total_price)
+Params for addItem
+addItem(name_of_item,quantity,unit_price,total_price)
 
     $co->addItem("13' Apple Retina 500 HDD",1,999.99,999.99);
     $co->addItem("Case Logic laptop Bag",2,100.50,201);
