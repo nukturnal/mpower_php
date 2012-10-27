@@ -28,9 +28,9 @@ Customer will be redirected back to this URL when he cancels the checkout on MPo
 
     MPower_Checkout_Store::setCancelUrl(CHECKOUT_CANCEL_URL);
 
-MPower will automatically redirect customer to this URL after successfull payment
-This setup is strictly optional and not needed in most cases.
-WHen a returnURL is not set, MPower will redirect the customer to the receipt page.
+MPower will automatically redirect customer to this URL after successfull payment.
+This setup is optional and highly recommended you dont set it, unless you want to customize the payment experience of your customers.
+When a returnURL is not set, MPower will redirect the customer to the receipt page.
 
     MPower_Checkout_Store::setReturnUrl(CHECKOUT_RETURN_URL);
 
