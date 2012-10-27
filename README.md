@@ -20,6 +20,9 @@ Require Mpower PHP library
 ## Create your Checkout Invoice
 
     $co = new MPower_Checkout_Invoice();
+
+    // addItem(name_of_item,quantity,unit_price,total_price)
+
     $co->addItem("13' Apple Retina 500 HDD",1,999.99,999.99);
     $co->addItem("Case Logic laptop Bag",2,100.50,201);
     $co->addItem("Mordecai's Bag",2,100.50,400);
