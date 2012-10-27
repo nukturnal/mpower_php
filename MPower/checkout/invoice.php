@@ -1,32 +1,38 @@
 <?php
 class MPower_Checkout_Invoice extends MPower_Checkout {
-  const BASE_URL = "http://0.0.0.0:3000/checkout-invoice/create";
-  public $items = array();
-  public $total_amount = 0.0;
-  public $taxes = array();
-  public $description;
-  public $currency = "ghs";
-  public $cancel_url;
-  public $return_url;
+
+  private $items = array();
+  private $total_amount = 0.0;
+  private $taxes = array();
+  private $description;
+  private $currency = "ghs";
+  private $cancel_url;
+  private $return_url;
   private $invoice_url;
+  private $custom_data;
 
   function __construct(){
     $this->cancel_url = MPower_Checkout_Store::getCancelUrl();
     $this->return_url = MPower_Checkout_Store::getReturnUrl();
+    $this->custom_data = new MPower_CustomData();
   }
 
   public function addItem($name,$quantity,$price,$totalPrice,$description="") {
     $this->items['item_'.count($this->items)] = array(
       'name' => $name,
       'quantity' => intval($quantity),
-      'unit_price' => number_format($price,2),
-      'total_price' => number_format($totalPrice,2),
+      'unit_price' => round($price,2),
+      'total_price' => round($totalPrice,2),
       'description' => $description
     );
   }
 
   public function setTotalAmount($amount) {
-    $this->total_amount = number_format($amount,2);
+    $this->total_amount = round($amount,2);
+  }
+
+  public function setDescription($description) {
+    $this->description = $description;
   }
 
   public function setCancelUrl($url) {
@@ -60,13 +66,33 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     return json_encode($this->taxes, JSON_FORCE_OBJECT);
   }
 
+  public function setCustomData($name,$value) {
+    $this->custom_data->set($name,$value);
+  }
+
+  public function getCustomData($name) {
+    return $this->custom_data->get($name);
+  }
+
+  public function showCustomData() {
+    return $this->custom_data->show();
+  }
+
+  public function getTotalAmount() {
+    return $this->total_amount;
+  }
+
+  public function getDescription() {
+    return $this->description;
+  }
+
   public function create() {
     $checkout_payload = array(
       'invoice' => array(
         'items' => $this->items,
         'taxes' => $this->taxes,
-        'total_amount' => number_format($this->total_amount,2),
-        'description' => $this->description
+        'total_amount' => $this->getTotalAmount(),
+        'description' => $this->getDescription()
       ),
       'store' => array(
         'name' => MPower_Checkout_Store::getName(),
@@ -76,13 +102,15 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
         'logo_url' => MPower_Checkout_Store::getLogoUrl(),
         'website_url' => MPower_Checkout_Store::getWebsiteUrl()
       ),
+      'custom_data' => $this->showCustomData(),
       'actions' => array(
         'cancel_url' => $this->cancel_url,
         'return_url' => $this->return_url
       )
     );
 
-    $result = MPower_Utilities::httpJsonRequest(self::BASE_URL,$checkout_payload);
+    $result = MPower_Utilities::httpJsonRequest(MPower_Setup::getCheckoutBaseUrl(),$checkout_payload);
+
     switch ($result["response_code"]) {
       case 00:
         $this->status = "success";
