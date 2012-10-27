@@ -67,6 +67,9 @@ Params for addItem function `addItem(name_of_item,quantity,unit_price,total_pric
       echo $co->response_text;
     }
 
+## Download MPower PHP Demo Store
+https://github.com/nukturnal/MPower_PHP_Demo_Store
+
 ## Contributing
 
 1. Fork it
