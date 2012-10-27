@@ -10,6 +10,9 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
   private $return_url;
   private $invoice_url;
   private $custom_data;
+  private $receipt_url;
+
+  private $customer = array();
 
   function __construct(){
     $this->cancel_url = MPower_Checkout_Store::getCancelUrl();
@@ -25,6 +28,14 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
       'total_price' => round($totalPrice,2),
       'description' => $description
     );
+  }
+
+  public function pushItems($data=array()) {
+    $this->items = $data;
+  }
+
+  public function pushTaxes($data=array()) {
+    $this->taxes = $data;
   }
 
   public function setTotalAmount($amount) {
@@ -70,6 +81,10 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     $this->custom_data->set($name,$value);
   }
 
+  public function pushCustomData($data=array()) {
+    $this->custom_data->push($data);
+  }
+
   public function getCustomData($name) {
     return $this->custom_data->get($name);
   }
@@ -84,6 +99,38 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
 
   public function getDescription() {
     return $this->description;
+  }
+
+  public function getReceiptUrl() {
+    return $this->receipt_url;
+  }
+
+  public function getStatus() {
+    return $this->status;
+  }
+
+  public function confirm($parsetoken="") {
+    $token = isset($token) ? $parsetoken : $_GET['token'];
+    $result = MPower_Utilities::httpGetRequest("http://0.0.0.0:3000/sandbox-api/v1/checkout-invoice/confirm/test_4fd6a70b07");
+    if(count($result) > 0) {
+      $this->status = $result['status'];
+      $this->pushCustomData($result["custom_data"]);
+      $this->pushItems($result["invoice"]['items']);
+      $this->pushTaxes($result["invoice"]['taxes']);
+      $this->customer = $result['customer'];
+      $this->setTotalAmount($result['invoice']['total_amount']);
+      $this->receipt_url = $result['receipt_url'];
+      return true;
+    }else{
+      $this->status = "fail";
+      $this->response_code = 1002;
+      $this->response_text = "Invoice Not Found";
+      return false;
+    }
+  }
+
+  public function getCustomerInfo($info_type) {
+    return $this->customer[$info_type];
   }
 
   public function create() {

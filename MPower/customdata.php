@@ -3,7 +3,7 @@ class MPower_CustomData {
   private $data = array();
 
   public function push($data_array=array()) {
-    $this-> $data = $data_array;
+    $this->data = $data_array;
   }
 
   public function set($name,$value) {

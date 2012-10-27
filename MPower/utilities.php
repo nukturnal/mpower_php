@@ -15,12 +15,12 @@ class MPower_Utilities {
       'MP-Mode' => MPower_Setup::getMode(),
       'User-Agent' => "MPower Checkout API PHP client v1 aka Don Nigalon"
     );
-    $request = Requests::post($url, $headers,json_encode($data,JSON_FORCE_OBJECT));
+    $request = Requests::post($url, $headers,json_encode($data,JSON_FORCE_OBJECT),array('timeout' => 10));
 
     return json_decode($request->body,true);
   }
 
-  public static function httpRequest($url,$data=array()){
+  public static function httpPostRequest($url,$data=array()){
     Requests::register_autoloader();
     $headers = array(
       'Accept' => 'application/x-www-form-urlencoded',
@@ -32,7 +32,23 @@ class MPower_Utilities {
       'User-Agent' => "MPower Checkout API PHP client v1 aka Don Nigalon"
     );
 
-    $request = Requests::post($url, $headers,$data);
+    $request = Requests::post($url, $headers,$data,array('timeout' => 10));
+
+    return json_decode($request->body,true);
+  }
+
+  public static function httpGetRequest($url){
+    Requests::register_autoloader();
+    $headers = array(
+      'MP-Public-Key' => MPower_Setup::getPublicKey(),
+      'MP-Private-Key' => MPower_Setup::getPrivateKey(),
+      'MP-Master-Key' => MPower_Setup::getMasterKey(),
+      'MP-Token' => MPower_Setup::getToken(),
+      'MP-Mode' => MPower_Setup::getMode(),
+      'User-Agent' => "MPower Checkout API PHP client v1 aka Don Nigalon"
+    );
+
+    $request = Requests::get($url, $headers,array('timeout' => 10));
 
     return json_decode($request->body,true);
   }

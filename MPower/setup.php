@@ -7,6 +7,8 @@ class MPower_Setup extends MPower {
 
   const LIVE_CHECKOUT_INVOICE_BASE_URL = "https://app.mpowerpayments.com/api/v1/checkout-invoice/create";
   const TEST_CHECKOUT_INVOICE_BASE_URL = "https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/create";
+  const LIVE_CHECKOUT_CONFIRM_BASE_URL = "https://app.mpowerpayments.com/api/v1/checkout-invoice/confirm/";
+  const TEST_CHECKOUT_CONFIRM_BASE_URL = "https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/confirm/";
 
   private static $mode = "test";
 
@@ -50,6 +52,14 @@ class MPower_Setup extends MPower {
 
   public static function getMode() {
     return self::$mode;
+  }
+
+  public static function getCheckoutConfirmUrl() {
+    if (self::getMode() == "live") {
+      return self::LIVE_CHECKOUT_CONFIRM_BASE_URL;
+    }else{
+      return self::TEST_CHECKOUT_CONFIRM_BASE_URL;
+    }
   }
 
   public static function getCheckoutBaseUrl() {
