@@ -77,6 +77,10 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     return json_encode($this->taxes, JSON_FORCE_OBJECT);
   }
 
+  public function getCustomerInfo($info_type) {
+    return $this->customer[$info_type];
+  }
+
   public function setCustomData($name,$value) {
     $this->custom_data->set($name,$value);
   }
@@ -109,28 +113,36 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     return $this->status;
   }
 
-  public function confirm($parsetoken="") {
-    $token = isset($token) ? $parsetoken : $_GET['token'];
-    $result = MPower_Utilities::httpGetRequest("http://0.0.0.0:3000/sandbox-api/v1/checkout-invoice/confirm/test_4fd6a70b07");
+  public function confirm() {
+    $token = $_GET['token'];
+    $result = MPower_Utilities::httpGetRequest(MPower_Setup::getCheckoutConfirmUrl().$token);
     if(count($result) > 0) {
-      $this->status = $result['status'];
-      $this->pushCustomData($result["custom_data"]);
-      $this->pushItems($result["invoice"]['items']);
-      $this->pushTaxes($result["invoice"]['taxes']);
-      $this->customer = $result['customer'];
-      $this->setTotalAmount($result['invoice']['total_amount']);
-      $this->receipt_url = $result['receipt_url'];
-      return true;
+      switch ($result['status']) {
+        case 'completed':
+          $this->status = $result['status'];
+          $this->pushCustomData($result["custom_data"]);
+          $this->pushItems($result["invoice"]['items']);
+          $this->pushTaxes($result["invoice"]['taxes']);
+          $this->customer = $result['customer'];
+          $this->setTotalAmount($result['invoice']['total_amount']);
+          $this->receipt_url = $result['receipt_url'];
+          return true;
+          break;
+        default:
+          $this->status = $result['status'];
+          $this->pushCustomData($result["custom_data"]);
+          $this->pushItems($result["invoice"]['items']);
+          $this->pushTaxes($result["invoice"]['taxes']);
+          $this->setTotalAmount($result['invoice']['total_amount']);
+          $this->response_text = "Invoice status is ".strtoupper($result['status']);
+          return false;
+      }
     }else{
       $this->status = "fail";
       $this->response_code = 1002;
       $this->response_text = "Invoice Not Found";
       return false;
     }
-  }
-
-  public function getCustomerInfo($info_type) {
-    return $this->customer[$info_type];
   }
 
   public function create() {
