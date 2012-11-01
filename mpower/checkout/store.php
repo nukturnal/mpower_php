@@ -26,8 +26,10 @@ class MPower_Checkout_Store extends MPower {
     self::$phoneNumber = $phoneNumber;
   }
 
-  public static function setWebsiteUrl($websiteUrl) {
-    self::$websiteUrl = $websiteUrl;
+  public static function setWebsiteUrl($url) {
+    if(filter_var($url, FILTER_VALIDATE_URL)){
+      self::$websiteUrl = $url;
+    }
   }
 
   public static function setLogoUrl($url) {
