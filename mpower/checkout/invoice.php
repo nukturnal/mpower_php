@@ -81,7 +81,7 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     return $this->customer[$info_type];
   }
 
-  public function setCustomData($name,$value) {
+  public function addCustomData($name,$value) {
     $this->custom_data->set($name,$value);
   }
 
