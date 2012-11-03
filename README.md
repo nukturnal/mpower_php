@@ -55,9 +55,9 @@ Params for addItem function `addItem(name_of_item,quantity,unit_price,total_pric
 
 ## You can add custom data to your invoice which can be called back later
 
-    $co->setCustomData("Firstname","Alfred");
-    $co->setCustomData("Lastname","Rowe");
-    $co->setCustomData("CartId",929292872);
+    $co->addCustomData("Firstname","Alfred");
+    $co->addCustomData("Lastname","Rowe");
+    $co->addCustomData("CartId",929292872);
 
 ## Redirecting to your checkout invoice page
 
