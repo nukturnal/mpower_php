@@ -48,6 +48,10 @@ Params for addItem function `addItem(name_of_item,quantity,unit_price,total_pric
 
     $co->setTotalAmount(1200.99);
 
+## Optionally set an invoice description
+
+    $co->setDescription("This is good for packaged pricing tables on your website.");
+
 ## Setup Tax Information (Optional)
 
     $co->addTax("VAT (15)",50);
