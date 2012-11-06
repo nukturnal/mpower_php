@@ -38,10 +38,10 @@ When a returnURL is not set, MPower will redirect the customer to the receipt pa
 
     $co = new MPower_Checkout_Invoice();
 
-Params for addItem function `addItem(name_of_item,quantity,unit_price,total_price)`
+Params for addItem function `addItem(name_of_item,quantity,unit_price,total_price,optional_description)`
 
     $co->addItem("13' Apple Retina 500 HDD",1,999.99,999.99);
-    $co->addItem("Case Logic laptop Bag",2,100.50,201);
+    $co->addItem("Case Logic laptop Bag",2,100.50,201,"Black Color with white stripes");
     $co->addItem("Mordecai's Bag",2,100.50,400);
 
 ## Set the total amount to be charged ! Important
