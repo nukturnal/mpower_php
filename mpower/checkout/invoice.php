@@ -176,6 +176,7 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     switch ($result["response_code"]) {
       case 00:
         $this->status = "success";
+        $this->token = $result["token"];
         $this->response_code = $result["response_code"];
         $this->response_text = $result["description"];
         $this->invoice_url = $result["response_text"];
