@@ -1,18 +1,18 @@
 <?php
 class MPower_Checkout_Invoice extends MPower_Checkout {
 
-  private $items = array();
-  private $total_amount = 0.0;
-  private $taxes = array();
-  private $description;
-  private $currency = "ghs";
-  private $cancel_url;
-  private $return_url;
-  private $invoice_url;
-  private $custom_data;
-  private $receipt_url;
+  protected $items = array();
+  protected $total_amount = 0.0;
+  protected $taxes = array();
+  protected $description;
+  protected $currency = "ghs";
+  protected $cancel_url;
+  protected $return_url;
+  protected $invoice_url;
+  protected $custom_data;
+  protected $receipt_url;
 
-  private $customer = array();
+  protected $customer = array();
 
   function __construct(){
     $this->cancel_url = MPower_Checkout_Store::getCancelUrl();
@@ -114,7 +114,8 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
   }
 
   public function confirm($token="") {
-    if (empty(trim($token)) {
+    $token = trim($token);
+    if (empty($token)) {
       $token = $_GET['token'];
     }
     

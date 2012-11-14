@@ -5,10 +5,15 @@ class MPower_Setup extends MPower {
   private static $publicKey;
   private static $token;
 
-  const LIVE_CHECKOUT_INVOICE_BASE_URL = "https://app.mpowerpayments.com/api/v1/checkout-invoice/create";
-  const TEST_CHECKOUT_INVOICE_BASE_URL = "https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/create";
-  const LIVE_CHECKOUT_CONFIRM_BASE_URL = "https://app.mpowerpayments.com/api/v1/checkout-invoice/confirm/";
-  const TEST_CHECKOUT_CONFIRM_BASE_URL = "https://app.mpowerpayments.com/sandbox-api/v1/checkout-invoice/confirm/";
+  const ROOT_URL_BASE = "http://localhost:3000";
+  const LIVE_CHECKOUT_INVOICE_BASE_URL = "/api/v1/checkout-invoice/create";
+  const TEST_CHECKOUT_INVOICE_BASE_URL = "/sandbox-api/v1/checkout-invoice/create";
+  const LIVE_CHECKOUT_CONFIRM_BASE_URL = "/api/v1/checkout-invoice/confirm/";
+  const TEST_CHECKOUT_CONFIRM_BASE_URL = "/sandbox-api/v1/checkout-invoice/confirm/";
+  const LIVE_OPR_BASE_URL = "/api/v1/opr/create";
+  const TEST_OPR_BASE_URL = "/sandbox-api/v1/opr/create";
+  const LIVE_OPR_CHARGE_BASE_URL = "/api/v1/opr/charge";
+  const TEST_OPR_CHARGE_BASE_URL = "/sandbox-api/v1/opr/charge";
 
   private static $mode = "test";
 
@@ -56,17 +61,33 @@ class MPower_Setup extends MPower {
 
   public static function getCheckoutConfirmUrl() {
     if (self::getMode() == "live") {
-      return self::LIVE_CHECKOUT_CONFIRM_BASE_URL;
+      return self::ROOT_URL_BASE.self::LIVE_CHECKOUT_CONFIRM_BASE_URL;
     }else{
-      return self::TEST_CHECKOUT_CONFIRM_BASE_URL;
+      return self::ROOT_URL_BASE.self::TEST_CHECKOUT_CONFIRM_BASE_URL;
     }
   }
 
   public static function getCheckoutBaseUrl() {
     if (self::getMode() == "live") {
-      return self::LIVE_CHECKOUT_INVOICE_BASE_URL;
+      return self::ROOT_URL_BASE.self::LIVE_CHECKOUT_INVOICE_BASE_URL;
     }else{
-      return self::TEST_CHECKOUT_INVOICE_BASE_URL;
+      return self::ROOT_URL_BASE.self::TEST_CHECKOUT_INVOICE_BASE_URL;
+    }
+  }
+
+  public static function getOPRInvoiceUrl() {
+    if (self::getMode() == "live") {
+      return self::ROOT_URL_BASE.self::LIVE_OPR_BASE_URL;
+    }else{
+      return self::ROOT_URL_BASE.self::TEST_OPR_BASE_URL;
+    }
+  }
+
+  public static function getOPRChargeUrl() {
+    if (self::getMode() == "live") {
+      return self::ROOT_URL_BASE.self::LIVE_OPR_CHARGE_BASE_URL;
+    }else{
+      return self::ROOT_URL_BASE.self::TEST_OPR_CHARGE_BASE_URL;
     }
   }
 }
