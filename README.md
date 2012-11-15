@@ -1,6 +1,5 @@
-# MpowerPHP
-==========
-
+# Mpower PHP Client API
+=======================
 MPower Payments PHP Client Library
 
 ## Offical Documentation
@@ -82,7 +81,7 @@ Params for addItem function `addItem(name_of_item,quantity,unit_price,total_pric
 First step is to take the customers mpower account alias, this could be the phoneno, username or mpower account number.
 pass this as a param for the `create` action of the `MPower::Onsite::Invoice` class instance. MPower will return an OPR TOKEN after the request is successfull. The customer will also receieve a confirmation TOKEN.
         
-        if($co->create()) {
+        if($co->create("CUSTOMER_MPOWER_USERNAME_OR_PHONE")) {
            $opr_token = $co->token;
         }else{
           echo $co->response_text;
