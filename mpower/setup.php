@@ -5,7 +5,7 @@ class MPower_Setup extends MPower {
   private static $publicKey;
   private static $token;
 
-  const ROOT_URL_BASE = "http://localhost:3000";
+  const ROOT_URL_BASE = "https://app.mpowerpayments.com";
   const LIVE_CHECKOUT_INVOICE_BASE_URL = "/api/v1/checkout-invoice/create";
   const TEST_CHECKOUT_INVOICE_BASE_URL = "/sandbox-api/v1/checkout-invoice/create";
   const LIVE_CHECKOUT_CONFIRM_BASE_URL = "/api/v1/checkout-invoice/confirm/";
