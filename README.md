@@ -87,12 +87,12 @@ pass this as a param for the `create` action of the `MPower::Onsite::Invoice` cl
 
 Second step requires you to accept the confirmation TOKEN from the customer, add your OPR Token and issue the charge. Upon successfull charge you should be able to access the digital receipt URL and other objects outlined in the offical docs.
 
-        if($co->charge("OPR_TOKEN","CUSTOMER_CONFIRM_TOKEN"))
+        if($co->charge("OPR_TOKEN","CUSTOMER_CONFIRM_TOKEN")){
             $receipt = $co->receipt_url;
             $customer_name = $co->customer["name"];
-        else
+        }else{
             echo $co->response_text;
-        end
+        }
 
 ## Download MPower PHP Demo Store
 https://github.com/nukturnal/MPower_PHP_Demo_Store
