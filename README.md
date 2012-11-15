@@ -3,6 +3,9 @@
 
 MPower Payments PHP Client Library
 
+## Offical Documentation
+http://mpowerpayments.com/developers/docs/php.html
+
 ## Installation
 
 Require Mpower PHP library
