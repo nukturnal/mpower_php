@@ -38,6 +38,10 @@ When a returnURL is not set, MPower will redirect the customer to the receipt pa
 
     $co = new MPower_Checkout_Invoice();
 
+## Create your Onsite Payment Request Invoice
+
+    co = new MPower_Onsite_Invoice();
+
 Params for addItem function `addItem(name_of_item,quantity,unit_price,total_price,optional_description)`
 
     $co->addItem("13' Apple Retina 500 HDD",1,999.99,999.99);
@@ -70,6 +74,25 @@ Params for addItem function `addItem(name_of_item,quantity,unit_price,total_pric
     }else{
       echo $co->response_text;
     }
+
+## Onsite Payment Request(OPR) Charge
+First step is to take the customers mpower account alias, this could be the phoneno, username or mpower account number.
+pass this as a param for the `create` action of the `MPower::Onsite::Invoice` class instance. MPower will return an OPR TOKEN after the request is successfull. The customer will also receieve a confirmation TOKEN.
+        
+        if($co->create()) {
+           $opr_token = $co->token;
+        }else{
+          echo $co->response_text;
+        }
+
+Second step requires you to accept the confirmation TOKEN from the customer, add your OPR Token and issue the charge. Upon successfull charge you should be able to access the digital receipt URL and other objects outlined in the offical docs.
+
+        if($co->charge("OPR_TOKEN","CUSTOMER_CONFIRM_TOKEN"))
+            $receipt = $co->receipt_url;
+            $customer_name = $co->customer["name"];
+        else
+            echo $co->response_text;
+        end
 
 ## Download MPower PHP Demo Store
 https://github.com/nukturnal/MPower_PHP_Demo_Store
