@@ -100,7 +100,7 @@ Second step requires you to accept the confirmation TOKEN from the customer, add
 You can pay any MPower account directly via your third party apps. This is particularly excellent for implementing your own Adaptive payment solutions on top of MPower. 
 
     $direct_pay = new MPower_DirectPay();
-    if ($direct_pay->creditAccount("0265854902",70.6588888888)) {
+    if ($direct_pay->creditAccount("MPOWER_CUSTOMER_USERNAME_OR_PHONENO",70.65)) {
       echo $direct_pay->description."\n";
       echo $direct_pay->response_text."\n";
       echo $direct_pay->transaction_id."\n";
