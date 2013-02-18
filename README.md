@@ -1,4 +1,4 @@
-# Mpower PHP Client API
+# MPower PHP Client API
 =======================
 MPower Payments PHP Client Library
 
@@ -94,6 +94,18 @@ Second step requires you to accept the confirmation TOKEN from the customer, add
             $customer_name = $co->customer["name"];
         }else{
             echo $co->response_text;
+        }
+
+## DirectPay Request
+You can pay any MPower account directly via your third party apps. This is particularly excellent for implementing your own Adaptive payment solutions on top of MPower. 
+
+        $direct_pay = new MPower_DirectPay();
+        if ($direct_pay->creditAccount("0265854902",70.6588888888)) {
+          echo $direct_pay->description."\n";
+          echo $direct_pay->response_text."\n";
+          echo $direct_pay->transaction_id."\n";
+        }else{
+          echo $direct_pay->response_text."\n";
         }
 
 ## Download MPower PHP Demo Store

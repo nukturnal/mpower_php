@@ -6,14 +6,21 @@ class MPower_Setup extends MPower {
   private static $token;
 
   const ROOT_URL_BASE = "https://app.mpowerpayments.com";
+
   const LIVE_CHECKOUT_INVOICE_BASE_URL = "/api/v1/checkout-invoice/create";
   const TEST_CHECKOUT_INVOICE_BASE_URL = "/sandbox-api/v1/checkout-invoice/create";
+
   const LIVE_CHECKOUT_CONFIRM_BASE_URL = "/api/v1/checkout-invoice/confirm/";
   const TEST_CHECKOUT_CONFIRM_BASE_URL = "/sandbox-api/v1/checkout-invoice/confirm/";
+
   const LIVE_OPR_BASE_URL = "/api/v1/opr/create";
   const TEST_OPR_BASE_URL = "/sandbox-api/v1/opr/create";
+
   const LIVE_OPR_CHARGE_BASE_URL = "/api/v1/opr/charge";
   const TEST_OPR_CHARGE_BASE_URL = "/sandbox-api/v1/opr/charge";
+
+  const LIVE_DIRECT_PAY_CREDIT_BASE_URL = "/api/v1/direct-pay/credit-account";
+  const TEST_DIRECT_PAY_CREDIT_BASE_URL = "/sandbox-api/v1/direct-pay/credit-account";
 
   private static $mode = "test";
 
@@ -88,6 +95,14 @@ class MPower_Setup extends MPower {
       return self::ROOT_URL_BASE.self::LIVE_OPR_CHARGE_BASE_URL;
     }else{
       return self::ROOT_URL_BASE.self::TEST_OPR_CHARGE_BASE_URL;
+    }
+  }
+
+  public static function getDirectPayCreditUrl() {
+    if (self::getMode() == "live") {
+      return self::ROOT_URL_BASE.self::LIVE_DIRECT_PAY_CREDIT_BASE_URL;
+    }else{
+      return self::ROOT_URL_BASE.self::TEST_DIRECT_PAY_CREDIT_BASE_URL;
     }
   }
 }

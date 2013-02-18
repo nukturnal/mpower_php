@@ -13,5 +13,6 @@ require_once("mpower/checkout.php");
 require_once("mpower/checkout/store.php");
 require_once("mpower/checkout/checkout_invoice.php");
 require_once("mpower/checkout/onsite_invoice.php");
+require_once("mpower/direct_pay.php");
 require_once("mpower/libraries/Requests.php");
 require_once("mpower/utilities.php");
