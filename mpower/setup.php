@@ -22,6 +22,9 @@ class MPower_Setup extends MPower {
   const LIVE_DIRECT_PAY_CREDIT_BASE_URL = "/api/v1/direct-pay/credit-account";
   const TEST_DIRECT_PAY_CREDIT_BASE_URL = "/sandbox-api/v1/direct-pay/credit-account";
 
+  const LIVE_DIRECT_CREDITCARD_CHARGE_URL = "/api/v1/direct-card/processcard";
+  const TEST_DIRECT_CREDITCARD_CHARGE_URL = "/sandbox-api/v1/direct-card/processcard";
+
   private static $mode = "test";
 
   private function __construct(){}
@@ -103,6 +106,14 @@ class MPower_Setup extends MPower {
       return self::ROOT_URL_BASE.self::LIVE_DIRECT_PAY_CREDIT_BASE_URL;
     }else{
       return self::ROOT_URL_BASE.self::TEST_DIRECT_PAY_CREDIT_BASE_URL;
+    }
+  }
+
+  public static function getDirectCreditcardChargeUrl() {
+    if (self::getMode() == "live") {
+      return self::ROOT_URL_BASE.self::LIVE_DIRECT_CREDITCARD_CHARGE_URL;
+    }else{
+      return self::ROOT_URL_BASE.self::TEST_DIRECT_CREDITCARD_CHARGE_URL;
     }
   }
 }

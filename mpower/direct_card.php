@@ -1,14 +1,19 @@
 <?php
-class MPower_DirectPay extends MPower_Checkout {
+class MPower_DirectCard extends MPower_Checkout {
+  public $unity_transaction_id;
 
-  public function creditAccount($payee_account,$amount)
+  public function charge($amount, $card_name, $card_number, $card_cvc, $exp_month, $exp_year)
   {
     $payload = array(
-      'account_alias' => $payee_account,
+      'card_name' => $card_name,
+      'card_number' => $card_number,
+      'card_cvc' => $card_cvc,
+      'exp_month' => $exp_month,
+      'exp_year' => $exp_year,
       'amount' => $amount
     );
     
-    $result = MPower_Utilities::httpJsonRequest(MPower_Setup::getDirectPayCreditUrl(), $payload);
+    $result = MPower_Utilities::httpJsonRequest(MPower_Setup::getDirectCreditcardChargeUrl(), $payload);
     if(count($result) > 0) {
       switch ($result['response_code']) {
         case 00:
@@ -16,6 +21,7 @@ class MPower_DirectPay extends MPower_Checkout {
           $this->response_text = $result["response_text"];
           $this->description = $result["description"];
           $this->transaction_id = $result["transaction_id"];
+          $this->unity_transaction_id = $result["unity_transaction_id"];
           return true;
           break;
         default:

@@ -4,7 +4,6 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
   protected $items = array();
   protected $total_amount = 0.0;
   protected $taxes = array();
-  protected $description;
   protected $currency = "ghs";
   protected $cancel_url;
   protected $return_url;
