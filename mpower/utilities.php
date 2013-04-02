@@ -15,7 +15,13 @@ class MPower_Utilities {
       'MP-Mode' => MPower_Setup::getMode(),
       'User-Agent' => "MPower Checkout API PHP client v1 aka Don Nigalon"
     );
-    $request = Requests::post($url, $headers,json_encode($data,JSON_FORCE_OBJECT),array('timeout' => 10));
+    if (JSON_ENCODE_PARAM_SUPPORT) {
+      $json_payload = json_encode($data,JSON_FORCE_OBJECT);
+    }else{
+      $json_payload = json_encode((object)$data);
+    }
+
+    $request = Requests::post($url, $headers,$json_payload,array('timeout' => 10));
 
     return json_decode($request->body,true);
   }

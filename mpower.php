@@ -7,6 +7,12 @@ abstract class MPower {
   const VERSION = "1.2.0";
 }
 
+if (strnatcmp(phpversion(),'5.3.0') >= 0) {
+  define('JSON_ENCODE_PARAM_SUPPORT',   true);
+}else{
+  define('JSON_ENCODE_PARAM_SUPPORT',   false);
+}
+
 require_once("mpower/setup.php");
 require_once("mpower/customdata.php");
 require_once("mpower/checkout.php");
