@@ -1,6 +1,7 @@
 {
     "name": "nukturnal/mpower_php",
     "description": "MPower Payments PHP Client Library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Encodev Labs",
