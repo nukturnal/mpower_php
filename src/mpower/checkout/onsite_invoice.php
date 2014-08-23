@@ -41,7 +41,7 @@ class MPower_Onsite_Invoice extends MPower_Checkout_Invoice {
     }
   }
 
-  public function create($account_alias) {
+  public function create($account_alias = null) {
     $invoice_data = array(
       'invoice' => array(
         'items' => $this->items,
