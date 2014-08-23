@@ -17,5 +17,5 @@
 			"src/mpower.php"
 		]
 	},
-	"minimum-stability": "stable"
+	"minimum-stability": "dev"
 }
