@@ -10,11 +10,12 @@
     ],
     "require": {},
     "autoload": {
-			"classmap": [
-					"src/mpower"
-			],
-			"files":[
-				"src/mpower.php"
-			]
-		}
+		"classmap": [
+				"src/mpower"
+		],
+		"files":[
+			"src/mpower.php"
+		]
+	},
+	"minimum-stability": "stable"
 }
