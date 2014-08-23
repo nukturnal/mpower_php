@@ -1,0 +1,11 @@
+{
+    "name": "nukturnal/mpower_php",
+    "description": "MPower Payments PHP Client Library",
+    "authors": [
+        {
+            "name": "Encodev Labs",
+            "email": "alfred@encodevlabs.com"
+        }
+    ],
+    "require": {}
+}
