@@ -148,7 +148,7 @@ class MPower_Checkout_Invoice extends MPower_Checkout {
     }
   }
 
-  public function create() {
+  public function create($account_alias = null) {
     $checkout_payload = array(
       'invoice' => array(
         'items' => $this->items,
